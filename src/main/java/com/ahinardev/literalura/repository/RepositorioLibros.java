@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 
 public interface RepositorioLibros extends JpaRepository<Libro, Long> {
@@ -21,5 +20,5 @@ public interface RepositorioLibros extends JpaRepository<Libro, Long> {
     boolean existsByTitulo(String titulo);
 
     @Query("SELECT l FROM Libro l ORDER BY l.numeroDeDescargas DESC")
-    List<Libro> findTop5ByOrderByNumeroDeDescargasDesc();
+    List<Libro> findTop5ByNumeroDeDescargasDesc();
 }

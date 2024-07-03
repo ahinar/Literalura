@@ -40,7 +40,7 @@ public class Principal {
                 3 - Lista de autores registrados
                 4 - Listar autores vivos en un determinado año
                 5 - Listar libros por idioma
-                6- Top 10 libros
+                6 - Top 5 libros
                 7 - Buscar autor por nombre
                 0 - Salir
                 """;
@@ -66,7 +66,7 @@ public class Principal {
                         listarLibrosPorIdioma();
                         break;
                     case 6:
-                        top10Libros();
+                        top5Libros();
                         break;
                     case 7:
                         buscarAutoresPorNombre();
@@ -251,15 +251,15 @@ public class Principal {
         }
     }
 
-    private void top10Libros() {
+    private void top5Libros() {
         // Obtén los 5 libros con más descargas
-        List<Libro> topLibros = repositorio.findTop5ByOrderByNumeroDeDescargasDesc();
+        List<Libro> topLibros = repositorio.findTop5ByNumeroDeDescargasDesc();
 
         if (topLibros.isEmpty()) {
             System.out.println("No hay libros disponibles para mostrar.");
         } else {
             System.out.println("Top 5 Libros por Número de Descargas:");
-            topLibros.forEach(libro -> {
+            topLibros.stream().limit(5).forEach(libro -> {
                 System.out.println("------------------------------");
                 System.out.println("Título: " + libro.getTitulo());
                 System.out.println("Autor: " + (libro.getAutor() != null ? libro.getAutor().getNombre() : "Desconocido"));
